@@ -166,6 +166,15 @@ footer p{font-family:'Orbitron',sans-serif;font-size:1.1em;font-weight:600;color
         <div class="stat-card"><div class="stat-number" data-target="1000">0</div><div class="stat-label">Projects Done</div></div>
     </div>
 
+    <div class="glass-card reveal" style="margin-bottom:50px; text-align:center;">
+        <div class="corner-br"></div>
+        <h2 class="section-title">Ask Scholar AI</h2>
+        <p style="color:rgba(255,255,255,0.75); margin-bottom:25px;">Get instant academic guidance, study tips, and service information. Free limit: 5 prompts per IP daily.</p>
+        <button id="openAiChat" class="social-link" style="margin:0 auto; border:none; cursor:pointer;">
+            <i class="fas fa-robot"></i> Open AI Assistant
+        </button>
+    </div>
+
     <div class="connect-section reveal">
         <h2>CONNECT WITH US!</h2>
         <div class="social-links">
@@ -196,6 +205,26 @@ footer p{font-family:'Orbitron',sans-serif;font-size:1.1em;font-weight:600;color
 
     <footer><p>YOUR PARTNER IN ACADEMIC EXCELLENCE!</p></footer>
 </div>
+
+<div id="aiChatWidget" style="position:fixed; bottom:95px; right:30px; width:360px; max-width:calc(100vw - 30px); background:rgba(10,26,31,0.95); backdrop-filter:blur(20px); border:1px solid rgba(230,194,48,0.25); border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.45), 0 0 25px rgba(230,194,48,0.15); z-index:999; overflow:hidden; display:none;">
+    <div style="padding:16px 18px; background:linear-gradient(135deg, rgba(230,194,48,0.18), rgba(27,74,86,0.35)); border-bottom:1px solid rgba(230,194,48,0.18); display:flex; align-items:center; justify-content:space-between; gap:12px;">
+        <div>
+            <div style="font-family:'Orbitron',sans-serif; color:#e6c230; font-size:0.95rem; letter-spacing:1px;">SCHOLAR AI</div>
+            <div id="aiRemaining" style="color:rgba(255,255,255,0.7); font-size:0.78rem; margin-top:2px;">Checking free prompts...</div>
+        </div>
+        <button id="closeAiChat" style="background:none; border:none; color:#fff; font-size:1.1rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+    </div>
+    <div id="aiMessages" style="height:320px; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(230,194,48,0.03));">
+        <div style="align-self:flex-start; max-width:85%; background:rgba(230,194,48,0.14); color:#fff; border:1px solid rgba(230,194,48,0.15); padding:12px 14px; border-radius:14px 14px 14px 4px; line-height:1.5; font-size:0.92rem;">Hi! I'm Scholar AI. Ask me about study tips, academic guidance, or our services.</div>
+    </div>
+    <div style="padding:14px; border-top:1px solid rgba(230,194,48,0.12); background:rgba(0,0,0,0.12);">
+        <form id="aiChatForm" style="display:flex; gap:10px; align-items:flex-end;">
+            <textarea id="aiInput" placeholder="Type your question..." maxlength="1000" rows="2" style="flex:1; resize:none; border:none; outline:none; border-radius:12px; padding:12px 14px; background:rgba(255,255,255,0.07); color:#fff; font-family:'Poppins',sans-serif;"></textarea>
+            <button type="submit" id="aiSendBtn" style="width:48px; height:48px; border:none; border-radius:12px; background:linear-gradient(135deg, #e6c230, #f0d050); color:#1b4a56; cursor:pointer; font-size:1rem;"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+</div>
+
 <button class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></button><script>
 // Particle System
 const canvas = document.getElementById('particleCanvas');
@@ -394,6 +423,85 @@ window.addEventListener('scroll', () => {
     else backToTop.classList.remove('show');
 });
 backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+// AI Chat Widget
+const AI_API_BASE = 'https://your-render-api.onrender.com';
+const aiWidget = document.getElementById('aiChatWidget');
+const openAiChat = document.getElementById('openAiChat');
+const closeAiChat = document.getElementById('closeAiChat');
+const aiMessages = document.getElementById('aiMessages');
+const aiChatForm = document.getElementById('aiChatForm');
+const aiInput = document.getElementById('aiInput');
+const aiSendBtn = document.getElementById('aiSendBtn');
+const aiRemaining = document.getElementById('aiRemaining');
+
+function addAiMessage(content, sender) {
+    const message = document.createElement('div');
+    message.style.alignSelf = sender === 'user' ? 'flex-end' : 'flex-start';
+    message.style.maxWidth = '85%';
+    message.style.padding = '12px 14px';
+    message.style.lineHeight = '1.5';
+    message.style.fontSize = '0.92rem';
+    message.style.color = '#fff';
+    message.style.border = sender === 'user' ? '1px solid rgba(0,255,255,0.18)' : '1px solid rgba(230,194,48,0.15)';
+    message.style.background = sender === 'user' ? 'rgba(0,255,255,0.1)' : 'rgba(230,194,48,0.14)';
+    message.style.borderRadius = sender === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px';
+    message.textContent = content;
+    aiMessages.appendChild(message);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+async function updateRemainingPrompts() {
+    try {
+        const response = await fetch(AI_API_BASE + '/api/remaining');
+        const data = await response.json();
+        aiRemaining.textContent = data.remaining + ' of ' + data.max + ' free prompts remaining today';
+    } catch (error) {
+        aiRemaining.textContent = 'Replace AI_API_BASE with your Render URL';
+    }
+}
+
+openAiChat.addEventListener('click', () => {
+    aiWidget.style.display = 'block';
+    updateRemainingPrompts();
+});
+
+closeAiChat.addEventListener('click', () => {
+    aiWidget.style.display = 'none';
+});
+
+aiChatForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const message = aiInput.value.trim();
+    if (!message) return;
+
+    addAiMessage(message, 'user');
+    aiInput.value = '';
+    aiSendBtn.disabled = true;
+    aiSendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+    try {
+        const response = await fetch(AI_API_BASE + '/api/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            addAiMessage(data.message || 'Something went wrong. Please try again.', 'ai');
+        } else {
+            addAiMessage(data.reply, 'ai');
+            aiRemaining.textContent = data.remaining + ' of 5 free prompts remaining today';
+        }
+    } catch (error) {
+        addAiMessage('Unable to connect. Replace AI_API_BASE with your Render backend URL.', 'ai');
+    } finally {
+        aiSendBtn.disabled = false;
+        aiSendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
+    }
+});
 
 // Smooth scroll
 document.documentElement.style.scrollBehavior = 'smooth';
