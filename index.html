@@ -166,15 +166,6 @@ footer p{font-family:'Orbitron',sans-serif;font-size:1.1em;font-weight:600;color
         <div class="stat-card"><div class="stat-number" data-target="1000">0</div><div class="stat-label">Projects Done</div></div>
     </div>
 
-    <div class="glass-card reveal" style="margin-bottom:50px; text-align:center;">
-        <div class="corner-br"></div>
-        <h2 class="section-title">Ask Scholar AI</h2>
-        <p style="color:rgba(255,255,255,0.75); margin-bottom:25px;">Get instant academic guidance, study tips, and service information. Free limit: 5 prompts per IP daily.</p>
-        <button id="openAiChat" class="social-link" style="margin:0 auto; border:none; cursor:pointer;">
-            <i class="fas fa-robot"></i> Open AI Assistant
-        </button>
-    </div>
-
     <div class="connect-section reveal">
         <h2>CONNECT WITH US!</h2>
         <div class="social-links">
@@ -206,21 +197,28 @@ footer p{font-family:'Orbitron',sans-serif;font-size:1.1em;font-weight:600;color
     <footer><p>YOUR PARTNER IN ACADEMIC EXCELLENCE!</p></footer>
 </div>
 
-<div id="aiChatWidget" style="position:fixed; bottom:95px; right:30px; width:360px; max-width:calc(100vw - 30px); background:rgba(10,26,31,0.95); backdrop-filter:blur(20px); border:1px solid rgba(230,194,48,0.25); border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.45), 0 0 25px rgba(230,194,48,0.15); z-index:999; overflow:hidden; display:none;">
-    <div style="padding:16px 18px; background:linear-gradient(135deg, rgba(230,194,48,0.18), rgba(27,74,86,0.35)); border-bottom:1px solid rgba(230,194,48,0.18); display:flex; align-items:center; justify-content:space-between; gap:12px;">
+<div style="position:fixed; bottom:95px; right:30px; z-index:999; display:flex; align-items:center; gap:10px;">
+    <div style="padding:8px 12px; border-radius:999px; background:rgba(10,26,31,0.92); color:#fff; border:1px solid rgba(230,194,48,0.2); box-shadow:0 10px 25px rgba(0,0,0,0.35); font-size:0.82rem; font-weight:600; letter-spacing:0.4px; white-space:nowrap;">AI Support</div>
+    <button id="openAiChat" style="width:62px; height:62px; border:none; border-radius:50%; background:linear-gradient(135deg, #e6c230, #f0d050); color:#1b4a56; box-shadow:0 14px 35px rgba(230,194,48,0.35); cursor:pointer; z-index:999; overflow:hidden; display:flex; align-items:center; justify-content:center; padding:0;">
+        <img src="google logo.PNG" alt="Scholar AI" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+    </button>
+</div>
+
+<div id="aiChatWidget" style="position:fixed; bottom:168px; right:30px; width:340px; max-width:calc(100vw - 24px); background:rgba(10,26,31,0.96); backdrop-filter:blur(20px); border:1px solid rgba(230,194,48,0.22); border-radius:18px; box-shadow:0 20px 60px rgba(0,0,0,0.45), 0 0 25px rgba(230,194,48,0.15); z-index:999; overflow:hidden; display:none;">
+    <div style="padding:14px 16px; background:linear-gradient(135deg, rgba(230,194,48,0.16), rgba(27,74,86,0.34)); border-bottom:1px solid rgba(230,194,48,0.15); display:flex; align-items:center; justify-content:space-between; gap:12px;">
         <div>
-            <div style="font-family:'Orbitron',sans-serif; color:#e6c230; font-size:0.95rem; letter-spacing:1px;">SCHOLAR AI</div>
-            <div id="aiRemaining" style="color:rgba(255,255,255,0.7); font-size:0.78rem; margin-top:2px;">Checking free prompts...</div>
+            <div style="font-family:'Orbitron',sans-serif; color:#e6c230; font-size:0.88rem; letter-spacing:1px;">Scholar AI Support</div>
+            <div id="aiRemaining" style="color:rgba(255,255,255,0.7); font-size:0.74rem; margin-top:2px;">Checking prompt limit...</div>
         </div>
-        <button id="closeAiChat" style="background:none; border:none; color:#fff; font-size:1.1rem; cursor:pointer;"><i class="fas fa-times"></i></button>
+        <button id="closeAiChat" style="background:none; border:none; color:#fff; font-size:1rem; cursor:pointer;"><i class="fas fa-times"></i></button>
     </div>
-    <div id="aiMessages" style="height:320px; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(230,194,48,0.03));">
-        <div style="align-self:flex-start; max-width:85%; background:rgba(230,194,48,0.14); color:#fff; border:1px solid rgba(230,194,48,0.15); padding:12px 14px; border-radius:14px 14px 14px 4px; line-height:1.5; font-size:0.92rem;">Hi! I'm Scholar AI. Ask me about study tips, academic guidance, or our services.</div>
+    <div id="aiMessages" style="height:280px; overflow-y:auto; padding:14px; display:flex; flex-direction:column; gap:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(230,194,48,0.03));">
+        <div style="align-self:flex-start; max-width:88%; background:rgba(230,194,48,0.14); color:#fff; border:1px solid rgba(230,194,48,0.15); padding:11px 13px; border-radius:14px 14px 14px 4px; line-height:1.45; font-size:0.88rem; display:flex; gap:10px; align-items:flex-start;"><img src="google logo.PNG" alt="Scholar AI" style="width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0;"><span>I'm Scholar AI Support, what can I do for you? I can answer any questions that you would like to ask about our business.</span></div>
     </div>
-    <div style="padding:14px; border-top:1px solid rgba(230,194,48,0.12); background:rgba(0,0,0,0.12);">
-        <form id="aiChatForm" style="display:flex; gap:10px; align-items:flex-end;">
-            <textarea id="aiInput" placeholder="Type your question..." maxlength="1000" rows="2" style="flex:1; resize:none; border:none; outline:none; border-radius:12px; padding:12px 14px; background:rgba(255,255,255,0.07); color:#fff; font-family:'Poppins',sans-serif;"></textarea>
-            <button type="submit" id="aiSendBtn" style="width:48px; height:48px; border:none; border-radius:12px; background:linear-gradient(135deg, #e6c230, #f0d050); color:#1b4a56; cursor:pointer; font-size:1rem;"><i class="fas fa-paper-plane"></i></button>
+    <div style="padding:12px; border-top:1px solid rgba(230,194,48,0.12); background:rgba(0,0,0,0.12);">
+        <form id="aiChatForm" style="display:flex; gap:8px; align-items:flex-end;">
+            <textarea id="aiInput" placeholder="Ask about our services..." maxlength="1000" rows="2" style="flex:1; resize:none; border:none; outline:none; border-radius:12px; padding:11px 12px; background:rgba(255,255,255,0.07); color:#fff; font-family:'Poppins',sans-serif; font-size:0.88rem;"></textarea>
+            <button type="submit" id="aiSendBtn" style="width:44px; height:44px; border:none; border-radius:12px; background:linear-gradient(135deg, #e6c230, #f0d050); color:#1b4a56; cursor:pointer; font-size:0.95rem;"><i class="fas fa-paper-plane"></i></button>
         </form>
     </div>
 </div>
@@ -425,7 +423,7 @@ window.addEventListener('scroll', () => {
 backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
 // AI Chat Widget
-const AI_API_BASE = 'https://your-render-api.onrender.com';
+const AI_API_BASE = 'https://scholar-solutions-api.onrender.com';
 const aiWidget = document.getElementById('aiChatWidget');
 const openAiChat = document.getElementById('openAiChat');
 const closeAiChat = document.getElementById('closeAiChat');
@@ -434,6 +432,21 @@ const aiChatForm = document.getElementById('aiChatForm');
 const aiInput = document.getElementById('aiInput');
 const aiSendBtn = document.getElementById('aiSendBtn');
 const aiRemaining = document.getElementById('aiRemaining');
+
+function formatAiContent(content) {
+    let cleaned = content.replace(/[\u{1F300}-\u{1F9FF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}\u{1F600}-\u{1F64F}\u{1F680}-\u{1F6FF}\u{1FA00}-\u{1FA6F}\u{1FA70}-\u{1FAFF}]/gu, '').trim();
+    const escaped = cleaned.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    let formatted = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong style="color:#e6c230;">$1</strong>');
+    formatted = formatted.replace(/\n/g, '<br>');
+
+    formatted = formatted.replace(/(?:^|<br>)[•\-]\s*([^<]+)/g, '<div style="display:flex; align-items:flex-start; gap:8px; margin:4px 0;"><span style="color:#e6c230; font-weight:700; line-height:1.5;">•</span><span>$1</span></div>');
+
+    formatted = formatted.replace(/\[SOCIAL:facebook\]/g, '<a href="https://www.facebook.com/SolutionsScholar" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:#1877f2; color:#fff; text-decoration:none; margin:8px 8px 0 0;"><i class="fab fa-facebook-f"></i></a>');
+    formatted = formatted.replace(/\[SOCIAL:instagram\]/g, '<a href="https://instagram.com/solutions_scholar" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045); color:#fff; text-decoration:none; margin:8px 8px 0 0;"><i class="fab fa-instagram"></i></a>');
+    formatted = formatted.replace(/\[SOCIAL:telegram\]/g, '<a href="https://t.me/scholarsolutions" target="_blank" style="display:inline-flex; align-items:center; justify-content:center; width:34px; height:34px; border-radius:50%; background:#229ed9; color:#fff; text-decoration:none; margin:8px 8px 0 0;"><i class="fab fa-telegram-plane"></i></a>');
+
+    return formatted;
+}
 
 function addAiMessage(content, sender) {
     const message = document.createElement('div');
@@ -446,9 +459,40 @@ function addAiMessage(content, sender) {
     message.style.border = sender === 'user' ? '1px solid rgba(0,255,255,0.18)' : '1px solid rgba(230,194,48,0.15)';
     message.style.background = sender === 'user' ? 'rgba(0,255,255,0.1)' : 'rgba(230,194,48,0.14)';
     message.style.borderRadius = sender === 'user' ? '14px 14px 4px 14px' : '14px 14px 14px 4px';
-    message.textContent = content;
+
+    if (sender === 'ai') {
+        message.style.display = 'flex';
+        message.style.alignItems = 'flex-start';
+        message.style.gap = '10px';
+        message.innerHTML = '<img src="google logo.PNG" alt="Scholar AI" style="width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0;"><div style="display:flex; flex-direction:column; gap:4px;">' + formatAiContent(content) + '</div>';
+    } else {
+        message.textContent = content;
+    }
+
     aiMessages.appendChild(message);
     aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function addTypingIndicator() {
+    const typing = document.createElement('div');
+    typing.id = 'aiTypingIndicator';
+    typing.style.alignSelf = 'flex-start';
+    typing.style.maxWidth = '85%';
+    typing.style.padding = '12px 14px';
+    typing.style.border = '1px solid rgba(230,194,48,0.15)';
+    typing.style.background = 'rgba(230,194,48,0.14)';
+    typing.style.borderRadius = '14px 14px 14px 4px';
+    typing.style.display = 'flex';
+    typing.style.alignItems = 'center';
+    typing.style.gap = '10px';
+    typing.innerHTML = '<img src="google logo.PNG" alt="Scholar AI" style="width:28px; height:28px; border-radius:50%; object-fit:cover; flex-shrink:0;"><div style="display:flex; gap:5px; align-items:center;"><span style="width:7px; height:7px; border-radius:50%; background:#e6c230; display:block; animation:aiBounce 1s infinite 0s;"></span><span style="width:7px; height:7px; border-radius:50%; background:#e6c230; display:block; animation:aiBounce 1s infinite 0.15s;"></span><span style="width:7px; height:7px; border-radius:50%; background:#e6c230; display:block; animation:aiBounce 1s infinite 0.3s;"></span></div>';
+    aiMessages.appendChild(typing);
+    aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+function removeTypingIndicator() {
+    const typing = document.getElementById('aiTypingIndicator');
+    if (typing) typing.remove();
 }
 
 async function updateRemainingPrompts() {
@@ -457,7 +501,7 @@ async function updateRemainingPrompts() {
         const data = await response.json();
         aiRemaining.textContent = data.remaining + ' of ' + data.max + ' free prompts remaining today';
     } catch (error) {
-        aiRemaining.textContent = 'Replace AI_API_BASE with your Render URL';
+        aiRemaining.textContent = 'Unable to check prompt limit right now';
     }
 }
 
@@ -479,6 +523,7 @@ aiChatForm.addEventListener('submit', async (e) => {
     aiInput.value = '';
     aiSendBtn.disabled = true;
     aiSendBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+    addTypingIndicator();
 
     try {
         const response = await fetch(AI_API_BASE + '/api/chat', {
@@ -489,6 +534,7 @@ aiChatForm.addEventListener('submit', async (e) => {
 
         const data = await response.json();
 
+        removeTypingIndicator();
         if (!response.ok) {
             addAiMessage(data.message || 'Something went wrong. Please try again.', 'ai');
         } else {
@@ -496,12 +542,24 @@ aiChatForm.addEventListener('submit', async (e) => {
             aiRemaining.textContent = data.remaining + ' of 5 free prompts remaining today';
         }
     } catch (error) {
-        addAiMessage('Unable to connect. Replace AI_API_BASE with your Render backend URL.', 'ai');
+        removeTypingIndicator();
+        addAiMessage('Unable to connect right now. Please try again in a moment.', 'ai');
     } finally {
         aiSendBtn.disabled = false;
         aiSendBtn.innerHTML = '<i class="fas fa-paper-plane"></i>';
     }
 });
+
+aiInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        aiChatForm.requestSubmit();
+    }
+});
+
+const aiTypingStyle = document.createElement('style');
+aiTypingStyle.textContent = '@keyframes aiBounce { 0%, 80%, 100% { transform: translateY(0); opacity: 0.5; } 40% { transform: translateY(-5px); opacity: 1; } }';
+document.head.appendChild(aiTypingStyle);
 
 // Smooth scroll
 document.documentElement.style.scrollBehavior = 'smooth';
